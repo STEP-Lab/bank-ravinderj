@@ -34,8 +34,21 @@ public class AccountTest {
   @Test(expected = InvalidAccountNumberException.class)
   public void checkInvalidAccountNumberValidity() throws MinimumBalanceException, InvalidAccountNumberException {
     Account account1 = new Account("1234", 500);
-    Account account2 = new Account("12345678", 500);
-    Account account3 = new Account("12-34", 500);
-    Account account4 = new Account("1234-56789", 500);
+    Account account2 = new Account("12345678", 500); // not working
+    Account account3 = new Account("12-34", 500); // not working
+    Account account4 = new Account("1234-56789", 500); // not working
+  }
+
+  @Test
+  public void checkWithdrawal() throws MinimumBalanceException, InvalidAccountNumberException {
+    Account account = new Account("1234-5678", 1500);
+    account.withdraw(500);
+    assertThat(account.getBalance(),is((float) 1000));
+  }
+
+  @Test(expected = MinimumBalanceException.class)
+  public void checkWithdrawalFromMinimumBalance() throws MinimumBalanceException, InvalidAccountNumberException {
+    Account account = new Account("1234-5678", 1000);
+    account.withdraw(500);
   }
 }

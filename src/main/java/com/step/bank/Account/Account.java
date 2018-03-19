@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Account {
   private final String accountNumber;
-  private final float balance;
+  private float balance;
 
   public Account(String accountNumber, float balance) throws MinimumBalanceException, InvalidAccountNumberException {
     Pattern regex = Pattern.compile("[\\d]{4}-[\\d]{4}");
@@ -29,5 +29,12 @@ public class Account {
 
   public String getAccountNumber() {
     return accountNumber;
+  }
+  public void withdraw(float amount) throws MinimumBalanceException {
+    float balance = this.balance - amount;
+    if (balance < 1000) {
+     throw new MinimumBalanceException();
+    }
+    this.balance -= amount;
   }
 }
