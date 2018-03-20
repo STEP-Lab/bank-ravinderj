@@ -1,4 +1,4 @@
-package com.step.bank.InvalidAccountNumberException;
+package com.step.bank;
 
 public class InvalidAccountNumberException extends Throwable {
   public InvalidAccountNumberException() {

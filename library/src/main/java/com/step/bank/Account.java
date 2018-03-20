@@ -1,7 +1,4 @@
-package com.step.bank.Account;
-
-import com.step.bank.InvalidAccountNumberException.InvalidAccountNumberException;
-import com.step.bank.MinimumBalanceException.MinimumBalanceException;
+package com.step.bank;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
