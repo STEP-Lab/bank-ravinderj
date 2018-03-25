@@ -2,23 +2,12 @@ package com.step.bank;
 
 import java.util.Date;
 
-public class DebitTransaction {
-  private final Date date;
-  private final float amount;
-  private final String to;
+class DebitTransaction extends Transaction {
 
-  public DebitTransaction(float amount, String to) {
-    this.date = new Date();
-    this.amount = amount;
-    this.to = to;
+  DebitTransaction(float amount, String to) {
+    super(new Date(), amount, to);
   }
   protected DebitTransaction(Date date, float amount, String to) {
-    this.date = date;
-    this.amount = amount;
-    this.to = to;
-  }
-
-  public Date getDate() {
-    return date;
+    super(date, amount, to);
   }
 }
