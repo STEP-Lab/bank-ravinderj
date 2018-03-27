@@ -15,4 +15,14 @@ public class Transactions {
   public void credit(float amount, String account) {
     this.list.add(new CreditTransaction(amount, account));
   }
+
+  public Transactions getAbove(float amount) {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction.getAmount() > amount) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
 }

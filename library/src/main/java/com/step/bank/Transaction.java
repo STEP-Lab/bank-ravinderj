@@ -31,4 +31,8 @@ public class Transaction {
   public int hashCode() {
     return Objects.hash(amount, to);
   }
+
+  public float getAmount() {
+    return amount;
+  }
 }

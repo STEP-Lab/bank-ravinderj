@@ -38,4 +38,16 @@ public class TransactionsTest {
     CreditTransaction creditTransaction = new CreditTransaction(new Date(),1000,"1234-5678");
     assertThat(transactions.list,hasItems(debitTransaction, creditTransaction));
   }
+
+  @Test
+  public void mustGetTransactionsAboveACertainAmount() {
+    transactions.debit(1200, "1234-5678");
+    transactions.credit(1000, "1234-1234");
+    transactions.debit(1100, "1234-6789");
+    transactions.credit(1500, "3456-7890");
+    DebitTransaction debitTransaction = new DebitTransaction(new Date(),1200,"1234-5678");
+    DebitTransaction debitTransaction2 = new DebitTransaction(new Date(),1100,"1234-6789");
+    CreditTransaction creditTransaction = new CreditTransaction(new Date(),1500,"3456-7890");
+    assertThat(transactions.getAbove(1000).list, hasItems(debitTransaction,debitTransaction2,creditTransaction));
+  }
 }
