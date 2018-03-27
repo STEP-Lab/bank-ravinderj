@@ -83,4 +83,13 @@ public class Transactions {
       printer.println(transaction.toString());
     }
   }
+
+  public void printCsv(PrintWriter writer) {
+    String[] headers = {"date","amount","to"};
+    for(Transaction transaction : list){
+      CsvPrinter csvPrinter = new CsvPrinter(writer, headers);
+      csvPrinter.write(transaction);
+      csvPrinter.close();
+    }
+  }
 }

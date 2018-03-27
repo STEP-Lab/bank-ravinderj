@@ -127,4 +127,18 @@ public class TransactionsTest {
     printer.close();
     assertThat(result, hasItems(debitTransaction.toString(),debitTransaction2.toString(),creditTransaction.toString()));
   }
+
+  @Test
+  public void shouldWriteToCsvFile() throws FileNotFoundException, UnsupportedEncodingException {
+    ArrayList<CharSequence> result = new ArrayList<>();
+    transactions.debit(1000,"1234-1234");
+    PrintWriter writer = new PrintWriter("transactions.csv", "utf8"){
+      @Override
+      public void println(String string) {
+        result.add(string);
+      }
+    };
+    transactions.printCsv(writer);
+    assertThat(result,hasItems("date,amount,to",transactions.list.get(0).toCsv()));
+  }
 }
