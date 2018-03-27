@@ -3,6 +3,10 @@ package com.step.bank;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -112,5 +116,25 @@ public class TransactionsTest {
     DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
     DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
     assertThat(transactions.getTransactionsBefore(date).list, hasItems(debitTransaction,debitTransaction2));
+  }
+
+  @Test
+  public void mustPrintAllTransactionsToAnOutputStream() throws FileNotFoundException, UnsupportedEncodingException {
+    transactions.credit(1000, "1234-1234");
+    transactions.debit(1100, "1234-6789");
+    transactions.debit(1500, "3456-7890");
+    DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
+    DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
+    CreditTransaction creditTransaction = new CreditTransaction(new Date(), 1000, "1234-1234");
+    ArrayList<String> result = new ArrayList<>();
+    PrintWriter printer = new PrintWriter("somefile", "utf8"){
+      @Override
+      public void println(String text){
+        result.add(text);
+      }
+    };
+    transactions.print(printer);
+    printer.close();
+    assertThat(result, hasItems(debitTransaction.toString(),debitTransaction2.toString(),creditTransaction.toString()));
   }
 }

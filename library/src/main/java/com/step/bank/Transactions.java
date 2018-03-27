@@ -1,5 +1,6 @@
 package com.step.bank;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -75,5 +76,11 @@ public class Transactions {
       }
     }
     return filteredTransactions;
+  }
+
+  public void print(PrintWriter printer) {
+    for (Transaction transaction: list) {
+      printer.println(transaction.toString());
+    }
   }
 }

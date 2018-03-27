@@ -28,6 +28,15 @@ public class Transaction {
   }
 
   @Override
+  public String toString() {
+    return "Transaction{" +
+            "date=" + date +
+            ", amount=" + amount +
+            ", to='" + to + '\'' +
+            '}';
+  }
+
+  @Override
   public int hashCode() {
     return Objects.hash(amount, to);
   }
