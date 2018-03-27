@@ -25,4 +25,24 @@ public class Transactions {
     }
     return filteredTransactions;
   }
+
+  public Transactions getBelow(float amount) {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction.getAmount() < amount) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
+
+  public Transactions getCreditTransactions() {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction instanceof CreditTransaction) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
 }
