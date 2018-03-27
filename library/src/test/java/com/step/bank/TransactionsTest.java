@@ -92,14 +92,10 @@ public class TransactionsTest {
     transactions.credit(1000, "1234-1234");
     transactions.debit(1100, "1234-6789");
     transactions.debit(1500, "3456-7890");
-    Calendar cal = Calendar.getInstance();
-    cal.set(Calendar.YEAR, 2017);
-    cal.set(Calendar.MONTH, 1);
-    cal.set(Calendar.DAY_OF_YEAR, 1);
-    Date date = cal.getTime();
+    Date currentDate = new Date();
     DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
     DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
-    assertThat(transactions.getTransactionsAfter(date).list, hasItems(debitTransaction,debitTransaction2));
+    assertThat(transactions.getTransactionsAfter(new Date(1)).list, hasItems(debitTransaction,debitTransaction2));
   }
 
   @Test
@@ -108,14 +104,9 @@ public class TransactionsTest {
     transactions.debit(1100, "1234-6789");
     transactions.debit(1500, "3456-7890");
     Date currentDate = new Date();
-    Calendar cal = Calendar.getInstance();
-    cal.set(Calendar.YEAR, 2017);
-    cal.set(Calendar.MONTH, 1);
-    cal.set(Calendar.DAY_OF_YEAR, currentDate.getDate()+1);
-    Date date = cal.getTime();
     DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
     DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
-    assertThat(transactions.getTransactionsBefore(date).list, hasItems(debitTransaction,debitTransaction2));
+    assertThat(transactions.getTransactionsBefore(new Date(currentDate.getYear(),currentDate.getMonth(),currentDate.getDate()+1)).list, hasItems(debitTransaction,debitTransaction2));
   }
 
   @Test
