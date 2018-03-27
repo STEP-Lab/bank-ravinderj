@@ -1,6 +1,7 @@
 package com.step.bank;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Transactions {
   public ArrayList<Transaction> list;
@@ -50,6 +51,26 @@ public class Transactions {
     Transactions filteredTransactions = new Transactions();
     for (Transaction transaction: list) {
       if (transaction instanceof DebitTransaction) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
+
+  public Transactions getTransactionsAfter(Date date) {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction.getDate().after(date)) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
+
+  public Transactions getTransactionsBefore(Date date) {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction.getDate().before(date)) {
         filteredTransactions.list.add(transaction);
       }
     }
