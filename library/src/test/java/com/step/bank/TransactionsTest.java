@@ -92,7 +92,6 @@ public class TransactionsTest {
     transactions.credit(1000, "1234-1234");
     transactions.debit(1100, "1234-6789");
     transactions.debit(1500, "3456-7890");
-    Date currentDate = new Date();
     DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
     DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
     assertThat(transactions.getTransactionsAfter(new Date(1)).list, hasItems(debitTransaction,debitTransaction2));
