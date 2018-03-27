@@ -71,4 +71,14 @@ public class TransactionsTest {
     CreditTransaction creditTransaction2 = new CreditTransaction(new Date(),1500,"3456-7890");
     assertThat(transactions.getCreditTransactions().list, hasItems(creditTransaction,creditTransaction2));
   }
+
+  @Test
+  public void mustGetAllDebitTransactions() {
+    transactions.credit(1000, "1234-1234");
+    transactions.debit(1100, "1234-6789");
+    transactions.debit(1500, "3456-7890");
+    DebitTransaction debitTransaction = new DebitTransaction(new Date(), 1100, "1234-6789");
+    DebitTransaction debitTransaction2 = new DebitTransaction(new Date(), 1500, "3456-7890");
+    assertThat(transactions.getDebitTransactions().list, hasItems(debitTransaction,debitTransaction2));
+  }
 }

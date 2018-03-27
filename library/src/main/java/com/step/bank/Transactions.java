@@ -45,4 +45,14 @@ public class Transactions {
     }
     return filteredTransactions;
   }
+
+  public Transactions getDebitTransactions() {
+    Transactions filteredTransactions = new Transactions();
+    for (Transaction transaction: list) {
+      if (transaction instanceof DebitTransaction) {
+        filteredTransactions.list.add(transaction);
+      }
+    }
+    return filteredTransactions;
+  }
 }
