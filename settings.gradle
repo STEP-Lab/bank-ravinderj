@@ -1,6 +1,3 @@
 rootProject.name = 'bank'
-rootProject.name = 'bank'
-rootProject.name = 'bank'
-rootProject.name = 'bank'
-rootProject.name = 'bank'
-
+include 'application'
+include 'library'

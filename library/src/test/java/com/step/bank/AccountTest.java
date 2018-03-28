@@ -1,9 +1,7 @@
 package com.step.bank;
 
-import com.step.bank.Account;
-import com.step.bank.AccountNumber;
-import com.step.bank.InvalidAccountNumberException;
-import com.step.bank.MinimumBalanceException;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +19,7 @@ public class AccountTest {
 
   @Test
   public void checkBalance() {
-    assertThat(account.getBalance(), is((float) 1000));
+    assertThat(account.getBalance(), is(Money.of(CurrencyUnit.of("INR"), 1000)));
   }
 
   @Test(expected = MinimumBalanceException.class)
@@ -41,7 +39,7 @@ public class AccountTest {
   public void checkWithdrawal() throws MinimumBalanceException, InvalidAccountNumberException {
     Account account = new Account(new AccountNumber("1234-5678"), 1500);
     account.withdraw(500);
-    assertThat(account.getBalance(),is((float) 1000));
+    assertThat(account.getBalance(),is(Money.of(CurrencyUnit.of("INR"), 1000)));
   }
 
   @Test(expected = MinimumBalanceException.class)
